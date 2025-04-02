@@ -7,6 +7,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors();
     app.useGlobalPipes(new common_1.ValidationPipe());
+    app.setGlobalPrefix('api');
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

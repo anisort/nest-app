@@ -5,7 +5,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { Paginate, PaginateQuery } from 'nestjs-paginate';
 
 
-@Controller('products')
+@Controller('v1/products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 

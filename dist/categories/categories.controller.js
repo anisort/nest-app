@@ -88,7 +88,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], CategoriesController.prototype, "findProductsByCategoryId", null);
 exports.CategoriesController = CategoriesController = __decorate([
-    (0, common_1.Controller)('categories'),
+    (0, common_1.Controller)('v1/categories'),
     __metadata("design:paramtypes", [categories_service_1.CategoriesService])
 ], CategoriesController);
 //# sourceMappingURL=categories.controller.js.map

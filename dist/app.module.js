@@ -21,11 +21,11 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
-                host: 'pg',
+                host: 'localhost',
                 port: 5432,
-                username: 'pguser',
-                password: 'password',
-                database: 'nestjs',
+                username: 'postgres',
+                password: '1234',
+                database: 'nest-app',
                 entities: [__dirname + '/**/*.entity{.ts,.js}'],
                 synchronize: true,
                 autoLoadEntities: true,

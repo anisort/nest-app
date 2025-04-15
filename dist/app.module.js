@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const products_module_1 = require("./products/products.module");
 const categories_module_1 = require("./categories/categories.module");
 const typeorm_1 = require("@nestjs/typeorm");
+const nest_keycloak_connect_1 = require("nest-keycloak-connect");
+const core_1 = require("@nestjs/core");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,11 +32,31 @@ exports.AppModule = AppModule = __decorate([
                 synchronize: true,
                 autoLoadEntities: true,
             }),
+            nest_keycloak_connect_1.KeycloakConnectModule.register({
+                authServerUrl: 'http://localhost:8080',
+                realm: 'horpynych',
+                clientId: 'nest-app',
+                secret: 'ZJUoCA8oBbU6odkfnCu3p7ov5MhfVbbq',
+            }),
             products_module_1.ProductsModule,
             categories_module_1.CategoriesModule
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [
+            app_service_1.AppService,
+            {
+                provide: core_1.APP_GUARD,
+                useClass: nest_keycloak_connect_1.AuthGuard,
+            },
+            {
+                provide: core_1.APP_GUARD,
+                useClass: nest_keycloak_connect_1.ResourceGuard,
+            },
+            {
+                provide: core_1.APP_GUARD,
+                useClass: nest_keycloak_connect_1.RoleGuard,
+            },
+        ],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

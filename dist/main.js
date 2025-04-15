@@ -8,7 +8,7 @@ async function bootstrap() {
     app.enableCors();
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.setGlobalPrefix('api');
-    await app.listen(process.env.PORT ?? 3000);
+    await app.listen(process.env.PORT ?? 3100);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

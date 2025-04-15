@@ -18,19 +18,20 @@ const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const update_product_dto_1 = require("./dto/update-product.dto");
 const nestjs_paginate_1 = require("nestjs-paginate");
+const nest_keycloak_connect_1 = require("nest-keycloak-connect");
 let ProductsController = class ProductsController {
     productsService;
     constructor(productsService) {
         this.productsService = productsService;
-    }
-    create(createProductDto) {
-        return this.productsService.create(createProductDto);
     }
     findAll(query) {
         return this.productsService.findAll(query);
     }
     findOne(id) {
         return this.productsService.findOne(+id);
+    }
+    create(createProductDto) {
+        return this.productsService.create(createProductDto);
     }
     update(id, updateProductDto) {
         return this.productsService.update(+id, updateProductDto);
@@ -41,14 +42,8 @@ let ProductsController = class ProductsController {
 };
 exports.ProductsController = ProductsController;
 __decorate([
-    (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
-    __metadata("design:returntype", void 0)
-], ProductsController.prototype, "create", null);
-__decorate([
     (0, common_1.Get)(),
+    (0, nest_keycloak_connect_1.Roles)({ roles: ['ApiViewer'] }),
     __param(0, (0, nestjs_paginate_1.Paginate)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -56,13 +51,23 @@ __decorate([
 ], ProductsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    (0, nest_keycloak_connect_1.Roles)({ roles: ['ApiViewer'] }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Post)(),
+    (0, nest_keycloak_connect_1.Roles)({ roles: ['ApiWriter'] }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "create", null);
+__decorate([
     (0, common_1.Put)(':id'),
+    (0, nest_keycloak_connect_1.Roles)({ roles: ['ApiWriter'] }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -71,6 +76,7 @@ __decorate([
 ], ProductsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    (0, nest_keycloak_connect_1.Roles)({ roles: ['ApiWriter'] }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
